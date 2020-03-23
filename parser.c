@@ -27,7 +27,7 @@ static void free_expression(Expression* expr){
 
 static int parse_expression(Expression** expr_p);
 
-static int parse_operator(Operator* oper_p);
+static int parse_operator(Operator* oper);
 
 static int parse_expression(Expression** expr_p) {
     Expression* expr = *expr_p = new_expression();
@@ -69,13 +69,13 @@ static int parse_expression(Expression** expr_p) {
     return 0;
 }
 
-static int parse_operator(Operator* oper_p) {
+static int parse_operator(Operator* oper) {
     if(Token.class == '+'){
-        *oper_p = '+';
+        *oper = '+';
         get_next_token();
         return 1;
     } else if(Token.class == '*'){
-        *oper_p = '*';
+        *oper = '*';
         get_next_token();
         return 1;
     } else{
@@ -85,7 +85,7 @@ static int parse_operator(Operator* oper_p) {
 
 /* public */
 
-int parse_program(AST_node **icode_p) {
+int parse_program(AST_node **icode) {
     Expression* expr;
 
     get_next_token(); /* start the lexical analyzer */
@@ -93,7 +93,7 @@ int parse_program(AST_node **icode_p) {
         if(Token.class != EoF){
             error("Garbage after end of program\n");
         }
-        *icode_p = expr;
+        *icode = expr;
         return 1;
     }
     return 0;

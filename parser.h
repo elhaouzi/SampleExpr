@@ -17,7 +17,7 @@ typedef struct _expression{
 
 typedef Expression AST_node;
 
-extern int parse_program(AST_node** icode_p);
+extern int parse_program(AST_node** icode);
 
 
 #endif //SMPLEEXPR_PARSER_H
